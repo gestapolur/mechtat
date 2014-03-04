@@ -1,0 +1,13 @@
+Flask>=0.10.1
+Jinja2>=2.7
+MarkupSafe>=0.18
+PyYAML>=3.10
+Werkzeug>=0.9.1
+argparse>=1.2.1
+beanstalkc>=0.3.0
+gunicorn>=17.5
+itsdangerous>=0.22
+redis>=2.7.6
+requests>=1.2.3
+wsgiref>=0.1.2
+
