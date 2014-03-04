@@ -25,3 +25,7 @@ app = Flask(__name__)
 def test():
     return render_template('index.html',
                            time=time.time())
+
+@app.route('/hello')
+def hello():
+    return "hello %s" % str(int(time.time()))
