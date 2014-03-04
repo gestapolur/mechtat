@@ -15,10 +15,10 @@ from flask import send_from_directory
 # BEANSTALK_TUBE = 'test-work-request'
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+# app.config['DEBUG'] = True
 
-logger = logging.getLogger('mechtat')
-logger.setLevel(logging.INFO)
+# logger = logging.getLogger('mechtat')
+# logger.setLevel(logging.INFO)
 
 
 @app.route('/', methods=['POST', 'GET'])
