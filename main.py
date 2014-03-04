@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Copyright 2014, Gestalt LUR. All rights reserved.
+
+A simple Blog framework.
+
+"""
+
 import json
 import logging
 import datetime
 import traceback
 import time
+import os
 
 import requests
 import redis
@@ -11,11 +20,11 @@ from flask import render_template
 from flask import request
 from flask import send_from_directory
 
-# BEANSTALK_URL = '192.168.1.29'
-# BEANSTALK_TUBE = 'test-work-request'
+REDIS_URL = os.environ.get("REDIS_URL")
+REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
 
 app = Flask(__name__)
-# app.config['DEBUG'] = True
+app.config['DEBUG'] = True
 
 # logger = logging.getLogger('mechtat')
 # logger.setLevel(logging.INFO)
@@ -26,6 +35,12 @@ def test():
     return render_template('index.html',
                            time=time.time())
 
-@app.route('/hello')
+@app.route('/post')
 def hello():
     return "hello %s" % str(int(time.time()))
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    redis_conn = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT)
+    post = redis_conn.get("post:%d" % post_id)
+    return post
