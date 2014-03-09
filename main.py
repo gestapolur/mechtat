@@ -9,7 +9,6 @@ A simple Blog framework.
 import json
 import logging
 import datetime
-import traceback
 import time
 import os
 
@@ -25,10 +24,6 @@ REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-
-# logger = logging.getLogger('mechtat')
-# logger.setLevel(logging.INFO)
-
 
 @app.route('/', methods=['POST', 'GET'])
 def test():
