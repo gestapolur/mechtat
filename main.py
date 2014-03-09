@@ -26,9 +26,13 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 @app.route('/', methods=['POST', 'GET'])
-def test():
+def show_main_page():
+    redis_conn = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT)
+    post_list = redis_conn.lrange("post_list", 0, -1)
+
     return render_template('index.html',
-                           time=time.time())
+                           post_list=post_list)
+
 
 @app.route('/post')
 def hello():
