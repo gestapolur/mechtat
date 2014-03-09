@@ -36,6 +36,11 @@ def hello():
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
-    redis_conn = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT)
-    post = redis_conn.get("post:%d" % post_id)
-    return post
+    pipe = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT).pipeline()
+    pipe.get("title:%d" % post_id)
+    pipe.get("post:%d" % post_id)
+    pipe.get("time:%d" % post_id)
+    title, post, time = pipe.execute()
+
+    return render_template('post.html',
+                           time=time, title=title, post=post)
