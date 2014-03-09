@@ -34,10 +34,6 @@ def show_main_page():
                            post_list=post_list)
 
 
-@app.route('/post')
-def hello():
-    return "hello %s" % str(int(time.time()))
-
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     pipe = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT).pipeline()
