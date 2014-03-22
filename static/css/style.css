@@ -1,5 +1,33 @@
-#square {
-    width: 100px;
-    height: 100px;
-    background: red;
+body, html {
+  height: 100%;
+  margin: 0%;
+}
+
+.square.horizonal {
+    position: relative;
+    margin: 0%;
+    height: 20px;
+    top: 31.8%;
+    z-index: 1;
+    background: #6F92FF;
+}
+
+.square.vectorial {
+    position: relative;
+    margin: 0%;
+    height: 100%;
+    width: 20px;
+    top: 0%;
+    left: 19.1%;
+    z-index: 2;
+    background: #F0112F;
+}
+
+.circle { 
+   width: 140px;
+   height: 140px;
+   background: blue; 
+   -moz-border-radius: 70px; 
+   -webkit-border-radius: 70px; 
+   border-radius: 70px;
 }
