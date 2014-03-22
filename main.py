@@ -25,22 +25,23 @@ REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+
 @app.route('/', methods=['POST', 'GET'])
 def show_main_page():
     redis_conn = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT)
     post_list = redis_conn.lrange("post_list", 0, -1)
 
-    return render_template('index.html',
-                           post_list=post_list)
+    if post_list:
+        return render_template('index.html',
+                               post_list=post_list)
+    return render_template('index.html')
 
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
-    pipe = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT).pipeline()
-    pipe.get("title:%d" % post_id)
-    pipe.get("post:%d" % post_id)
-    pipe.get("time:%d" % post_id)
-    title, post, time = pipe.execute()
+    post = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT).get("post:%d" % post_id)
+    pipe.get
+    post = pipe.execute()
 
     return render_template('post.html',
                            time=time, title=title, post=post)
