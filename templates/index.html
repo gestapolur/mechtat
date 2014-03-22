@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
-  Post List<br>
-  Here the post comes.
+  {% if post %}
+    {{ post }}
+  {% endif %}
 </body>
 </html>

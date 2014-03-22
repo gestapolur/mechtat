@@ -39,9 +39,14 @@ def show_main_page():
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
-    post = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT).get("post:%d" % post_id)
-    pipe.get
-    post = pipe.execute()
-
-    return render_template('post.html',
-                           time=time, title=title, post=post)
+    post = redis.StrictRedis(
+        host=REDIS_URL, port=REDIS_PORT).get("post:%d" % post_id)
+    if post:
+        post = json.loads(post)
+        return render_template(
+            'post.html',
+            time=datetime.datetime.fromtimestamp(
+                int(post["time"])).strftime("%x %X"),
+            title=post["title"],
+            text=post["text"])
+    return "Post not found."
