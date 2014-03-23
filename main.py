@@ -30,10 +30,15 @@ app.config['DEBUG'] = True
 def show_main_page():
     redis_conn = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT)
     post_list = redis_conn.lrange("post_list", 0, -1)
-
     if post_list:
         return render_template('index.html',
                                post_list=post_list)
+    else: # @todo: for test use
+        return render_template('index.html',
+                               post_list=["Test article 1",
+                                          "Test article 2",
+                                          "Test article 3"])
+        
     return render_template('index.html')
 
 

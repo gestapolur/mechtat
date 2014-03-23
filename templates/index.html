@@ -8,8 +8,22 @@
 <body>
   <div class="square horizonal"> </div>
   <div class="square vectorial"> </div>
-  {% if post %}
-    {{ post }}
+  <div id="textarea">
+  {% if post_list %}
+  <ul>
+  {% for post in post_list %}
+    <li><a href="#">{{ post }}</a></li>
+  {% endfor %}
   {% endif %}
+  </ul>
+  </div>
+
+  <!-- Google API -->
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <!-- jQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <!-- need load jquery first -->
+  <script type="text/javascript" src="static/js/script.js"></script>    
+
 </body>
 </html>
